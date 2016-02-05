@@ -1,0 +1,12 @@
+# Please add the global configuration options for your module here
+assetic:
+    bundles:
+        - CampaignChainOperationXingBundle
+    assets:
+        campaignchain_operation_xing_message_css:
+            inputs:
+                - '@CampaignChainOperationXingBundle/Resources/public/css/xing_message.css'
+twig:
+    form:
+        resources:
+            - 'CampaignChainOperationXingBundle:Form:fields.html.twig'

@@ -1,0 +1,28 @@
+{% extends 'CampaignChainCoreBundle:Operation:read.html.twig' %}
+
+{% block operation %}
+
+    {% stylesheets '@campaignchain_operation_xing_message_css' %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+
+    {% include 'CampaignChainCoreBundle:Operation:field_header.html.twig' %}
+
+    <div class="message">
+        <a href="{{ location.getUrl() }}"><img src="{{ location.getImage() }}" class="location-image" width="65" height="65"></a>
+        <div class="body">
+            <div class="location-name"><a href="{{ location.getUrl() }}">{{ location.getName() }}</a></div>
+            <div class="message-content">{{ message.getMessage() }}</div>
+        </div>
+    </div>    
+    
+    {% include 'CampaignChainCoreBundle:Operation:field_footer.html.twig' %}
+
+    <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group" role="group" aria-label="...">
+            <a href="{{ message.getUrl() }}" target="_blank" class="btn btn-default"><i class="fa fa-external-link"></i> View on XING</a>
+        </div>
+    </div>
+
+{% endblock %}
+

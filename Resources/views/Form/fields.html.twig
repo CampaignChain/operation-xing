@@ -1,0 +1,11 @@
+{% block campaignchain_operation_xing_message_widget %}
+    {% spaceless %}
+        {% stylesheets '@campaignchain_operation_xing_message_css' %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+        {% endstylesheets %}
+        {% include 'CampaignChainCoreBundle:Operation:field_header.html.twig' %}
+            <p>What's happening?</p>
+            {{ form_row(form.message, { 'widget_col': 12}) }}
+        {% include 'CampaignChainCoreBundle:Operation:field_footer.html.twig' %}
+    {% endspaceless %}
+{% endblock %}

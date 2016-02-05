@@ -1,0 +1,13 @@
+
+modules:
+    campaignchain-xing-message:
+        display_name: Post message on Xing
+        description: This module posts a message on Xing
+        services:
+            job: campaignchain.job.operation.xing.message
+            report: campaignchain.job.report.xing.message
+        params: 
+            owns_location: true
+        metrics:
+            activity:
+                - "Likes"
