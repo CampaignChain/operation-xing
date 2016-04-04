@@ -11,12 +11,12 @@ class XingMessageOperationType extends OperationType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('message', 'text', array(
+            ->add('message', 'textarea', array(
                 'property_path' => 'message',
-                'label' => 'Message',
+                'label' => false,
                 'attr' => array(
-                    'placeholder' => 'Add message...',
-                    'max_length' => 420
+                    'placeholder' => "What's new?",
+                    'maxlength' => 420
                 )
             ));
     }
