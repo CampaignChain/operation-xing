@@ -32,6 +32,11 @@ class XingMessage extends Meta
      * @ORM\Column(type="text", length=255, nullable=true)
      */
     protected $url;
+
+    /**
+     * @ORM\Column(type="text", length=255, nullable=true)
+     */
+    protected $messageId;
     
     /**
      * Get id
@@ -110,5 +115,29 @@ class XingMessage extends Meta
     public function getUrl()
     {
         return $this->url;
-    }    
+    }   
+
+    /**
+     * Set message id
+     *
+     * @param string $messageId
+     * @return XingMessage
+     */
+    public function setMessageId($messageId)
+    {
+        $this->messageId = $messageId;
+
+        return $this;
+    }
+
+    /**
+     * Get message id
+     *
+     * @return string 
+     */
+    public function getMessageId()
+    {
+        return $this->messageId;
+    }
+    
 }

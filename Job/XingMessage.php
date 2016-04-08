@@ -43,9 +43,10 @@ class XingMessage implements JobActionInterface
         $request = $connection->post('users/' . $identifier . '/status_message', array(), array('id' => $identifier, 'message' => $message->getMessage()));
         $response = $request->send();
         $messageEndpoint = $response->getHeader('location');
-        $messageId = strtok(basename($messageEndpoint), '_');
-        $messageUrl = 'https://www.xing.com/feedy/stories/' . $messageId;
+        $messageId = basename($messageEndpoint);
+        $messageUrl = 'https://www.xing.com/feedy/stories/' . strtok($messageId, '_');
         $message->setUrl($messageUrl);
+        $message->setMessageId($messageId);
 
         $message->getOperation()->setStatus(Action::STATUS_CLOSED);
         $location = $message->getOperation()->getLocations()[0];
@@ -53,7 +54,10 @@ class XingMessage implements JobActionInterface
         $location->setUrl($messageUrl);
         $location->setName($message->getOperation()->getName());
         $location->setStatus(Medium::STATUS_ACTIVE);
-        
+
+        // Schedule data collection for report
+        $report = $this->container->get('campaignchain.job.report.campaignchain.xing.message');
+        $report->schedule($message->getOperation());        
         $this->em->flush();
 
         $this->message = 'The message "'.$message->getMessage().'" with the ID "'.$messageId.'" has been posted on XING. See it on XING: <a href="'.$messageUrl.'">'.$messageUrl.'</a>';
