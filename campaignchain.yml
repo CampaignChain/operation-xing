@@ -4,10 +4,11 @@ modules:
         display_name: Post message on Xing
         description: This module posts a message on Xing
         services:
-            job: campaignchain.job.operation.xing.message
-            report: campaignchain.job.report.xing.message
+            job: campaignchain.job.operation.campaignchain.xing.message
+            report: campaignchain.job.report.campaignchain.xing.message
         params: 
             owns_location: true
         metrics:
             activity:
                 - "Likes"
+                - "Comments"
