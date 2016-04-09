@@ -32,6 +32,11 @@ class XingMessage implements JobActionInterface
             throw new \Exception('No message found for an operation with ID: '.$operationId);
         }
 
+        $ctaService = $this->container->get('campaignchain.core.cta');
+        $message->setMessage(
+            $ctaService->processCTAs($message->getMessage(), $message->getOperation(), CTAService::FORMAT_TXT)->getContent()
+        );
+        
         $oauthToken = $this->container->get('campaignchain.security.authentication.client.oauth.token');
         $activity = $message->getOperation()->getActivity();
         $identifier = $activity->getLocation()->getIdentifier();
