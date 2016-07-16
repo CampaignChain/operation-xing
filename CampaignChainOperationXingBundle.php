@@ -17,8 +17,13 @@
 
 namespace CampaignChain\Operation\XingBundle;
 
+use CampaignChain\Operation\XingBundle\DependencyInjection\CampaignChainOperationXingExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class CampaignChainOperationXingBundle extends Bundle
 {
+    public function getContainerExtension()
+    {
+        return new CampaignChainOperationXingExtension();
+    }
 }
