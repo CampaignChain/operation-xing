@@ -29,7 +29,18 @@ class XingMessage implements OperationServiceInterface
     {
         $this->em = $em;
     }
-    
+
+    public function getContent(Operation $operation)
+    {
+        return $this->getMessageByOperation($operation->getId());
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     * @deprecated Use getContent(Operation $operation) instead.
+     */
     public function getMessageByOperation($id){
         $message = $this->em->getRepository('CampaignChainOperationXingBundle:XingMessage')
             ->findOneByOperation($id);
