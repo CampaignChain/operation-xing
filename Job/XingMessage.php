@@ -50,7 +50,7 @@ class XingMessage implements JobActionInterface
 
         $ctaService = $this->container->get('campaignchain.core.cta');
         $message->setMessage(
-            $ctaService->processCTAs($message->getMessage(), $message->getOperation(), CTAService::FORMAT_TXT)->getContent()
+            $ctaService->processCTAs($message->getMessage(), $message->getOperation())->getContent()
         );
         
         $oauthToken = $this->container->get('campaignchain.security.authentication.client.oauth.token');
