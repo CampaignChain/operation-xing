@@ -21,10 +21,10 @@ parameters:
 services:
     campaignchain.job.operation.campaignchain.xing.message:
         class: CampaignChain\Operation\XingBundle\Job\XingMessage
-        arguments: [ @doctrine.orm.entity_manager, @service_container ]
+        arguments: [ @doctrine, @service_container ]
     campaignchain.job.report.campaignchain.xing.message:
         class: CampaignChain\Operation\XingBundle\Job\XingMessageReport
-        arguments: [ @doctrine.orm.entity_manager, @service_container ]
+        arguments: [ @doctrine, @service_container ]
     campaignchain.operation.campaignchain.xing.message:
         class: CampaignChain\Operation\XingBundle\EntityService\XingMessage
-        arguments: [ @doctrine.orm.entity_manager ]
+        arguments: [ @doctrine ]

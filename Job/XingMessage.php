@@ -18,7 +18,7 @@
 namespace CampaignChain\Operation\XingBundle\Job;
 
 use CampaignChain\CoreBundle\Entity\Action;
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use CampaignChain\CoreBundle\Entity\Medium;
 use CampaignChain\CoreBundle\Job\JobActionInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,9 +32,9 @@ class XingMessage implements JobActionInterface
     protected $message;
     protected $link;
 
-    public function __construct(EntityManager $em, $container)
+    public function __construct(ManagerRegistry $managerRegistry, $container)
     {
-        $this->em = $em;
+        $this->em = $managerRegistry->getManager();
         $this->container = $container;
     }
 
