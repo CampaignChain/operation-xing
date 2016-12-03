@@ -1,0 +1,37 @@
+{#
+Copyright 2016 CampaignChain, Inc. <info@campaignchain.com>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+#}
+
+{% stylesheets '@campaignchain_operation_xing_message_css' %}
+<link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+{% endstylesheets %}
+
+{% include 'CampaignChainCoreBundle:Operation:field_header.html.twig' %}
+
+<div class="message">
+    <a href="{{ location.getUrl() }}"><img src="{{ location.getImage() }}" class="location-image" width="65" height="65"></a>
+    <div class="body">
+        <div class="location-name"><a href="{{ location.getUrl() }}">{{ location.getName() }}</a></div>
+        <div class="message-content">{{ message.getMessage() }}</div>
+    </div>
+</div>
+
+{% include 'CampaignChainCoreBundle:Operation:field_footer.html.twig' %}
+
+<div class="btn-toolbar" role="toolbar">
+    <div class="btn-group" role="group" aria-label="...">
+        <a href="{{ message.getUrl() }}" target="_blank" class="btn btn-default"><i class="fa fa-external-link"></i> View on XING</a>
+    </div>
+</div>
