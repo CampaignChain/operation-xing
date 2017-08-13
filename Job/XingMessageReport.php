@@ -17,6 +17,7 @@
 
 namespace CampaignChain\Operation\XingBundle\Job;
 
+use CampaignChain\Channel\XingBundle\REST\XingClient;
 use CampaignChain\CoreBundle\Entity\SchedulerReportOperation;
 use CampaignChain\CoreBundle\Job\JobReportInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -74,11 +75,11 @@ class XingMessageReport implements JobReportInterface
         $messageId = $message->getMessageId();
 
         $client = $this->container->get('campaignchain.channel.xing.rest.client');
+        /** @var XingClient $connection */
         $connection = $client->connectByActivity($activity);
         
-        $request = $connection->get('activities/' . $messageId, array());
-        $response = $request->send()->json();
-        
+        $response = $connection->getStatusActivities($messageId);
+
         if(!count($response)){
             $likes = 0;
             $comments = 0;

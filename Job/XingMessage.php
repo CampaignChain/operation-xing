@@ -17,6 +17,7 @@
 
 namespace CampaignChain\Operation\XingBundle\Job;
 
+use CampaignChain\Channel\XingBundle\REST\XingClient;
 use CampaignChain\CoreBundle\Entity\Action;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use CampaignChain\CoreBundle\Entity\Medium;
@@ -59,20 +60,18 @@ class XingMessage implements JobActionInterface
         $token = $oauthToken->getToken($activity->getLocation());
         
         $client = $this->container->get('campaignchain.channel.xing.rest.client');
+        /** @var XingClient $connection */
         $connection = $client->connectByActivity($message->getOperation()->getActivity());
         
-        $request = $connection->post('users/' . $identifier . '/status_message', array(), array('id' => $identifier, 'message' => $message->getMessage()));
-        $response = $request->send();
-        $messageEndpoint = $response->getHeader('location');
-        $messageId = basename($messageEndpoint);
-        $messageUrl = 'https://www.xing.com/feedy/stories/' . strtok($messageId, '_');
-        $message->setUrl($messageUrl);
-        $message->setMessageId($messageId);
+        $response = $connection->postStatusMessage( $identifier, $message->getMessage());
+
+        $message->setUrl($response['url']);
+        $message->setMessageId($response['id']);
 
         $message->getOperation()->setStatus(Action::STATUS_CLOSED);
         $location = $message->getOperation()->getLocations()[0];
-        $location->setIdentifier($messageId);
-        $location->setUrl($messageUrl);
+        $location->setIdentifier($response['id']);
+        $location->setUrl($response['url']);
         $location->setName($message->getOperation()->getName());
         $location->setStatus(Medium::STATUS_ACTIVE);
 
@@ -81,7 +80,7 @@ class XingMessage implements JobActionInterface
         $report->schedule($message->getOperation());        
         $this->em->flush();
 
-        $this->message = 'The message "'.$message->getMessage().'" with the ID "'.$messageId.'" has been posted on XING. See it on XING: <a href="'.$messageUrl.'">'.$messageUrl.'</a>';
+        $this->message = 'The message "'.$message->getMessage().'" with the ID "'.$response['id'].'" has been posted on XING. See it on XING: <a href="'.$response['url'].'">'.$response['url'].'</a>';
 
         return self::STATUS_OK;
     }
