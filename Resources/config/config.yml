@@ -20,6 +20,5 @@ assetic:
             inputs:
                 - '@CampaignChainOperationXingBundle/Resources/public/css/xing_message.css'
 twig:
-    form:
-        resources:
-            - 'CampaignChainOperationXingBundle:Form:fields.html.twig'
+    form_themes:
+        - 'CampaignChainOperationXingBundle:Form:fields.html.twig'
