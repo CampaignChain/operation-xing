@@ -49,7 +49,7 @@ class XingMessageOperationType extends OperationType
         $resolver->setDefaults($defaults);
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'campaignchain_operation_xing_message';
     }
