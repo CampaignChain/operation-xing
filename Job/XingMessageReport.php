@@ -42,7 +42,7 @@ class XingMessageReport implements JobReportInterface
     public function getMessage(){
         return $this->message;
     }
-    
+
     public function schedule($operation, $facts = null)
     {
         $scheduler = new SchedulerReportOperation();
@@ -50,6 +50,7 @@ class XingMessageReport implements JobReportInterface
         $scheduler->setInterval('1 hour');
         $scheduler->setEndAction($operation->getActivity()->getCampaign());
         $this->em->persist($scheduler);
+        $this->em->flush();
 
         $facts[self::METRIC_LIKES] = 0;
         $facts[self::METRIC_COMMENTS] = 0;
