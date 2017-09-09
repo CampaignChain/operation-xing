@@ -20,7 +20,7 @@ namespace CampaignChain\Operation\XingBundle\Form\Type;
 use CampaignChain\CoreBundle\Form\Type\OperationType;
 use CampaignChain\TextareaCountFormTypeBundle\Form\Type\TextareaCountType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class XingMessageOperationType extends OperationType
 {
@@ -37,7 +37,7 @@ class XingMessageOperationType extends OperationType
             ));
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $defaults = array(
             'data_class' => 'CampaignChain\Operation\XingBundle\Entity\XingMessage',

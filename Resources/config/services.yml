@@ -28,3 +28,10 @@ services:
     campaignchain.operation.campaignchain.xing.message:
         class: CampaignChain\Operation\XingBundle\EntityService\XingMessage
         arguments: [ '@doctrine' ]
+    campaignchain.operation.xing.form.type.message:
+        class: CampaignChain\Operation\XingBundle\Form\Type\XingMessageOperationType
+        arguments:
+            - '@doctrine'
+            - '@service_container'
+        tags:
+            - { name: form.type }
