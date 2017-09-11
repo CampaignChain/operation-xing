@@ -26,6 +26,8 @@ class XingMessageOperationType extends OperationType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $this->setOptions($options);
+
         $builder
             ->add('message', TextareaCountType::class, array(
                 'property_path' => 'message',
@@ -39,13 +41,12 @@ class XingMessageOperationType extends OperationType
 
     public function configureOptions(OptionsResolver $resolver)
     {
+        parent::configureOptions($resolver);
+
         $defaults = array(
             'data_class' => 'CampaignChain\Operation\XingBundle\Entity\XingMessage',
         );
 
-        if($this->content){
-            $defaults['data'] = $this->content;
-        }
         $resolver->setDefaults($defaults);
     }
 
